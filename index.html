@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Datos de Formularios USCIS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            background: #e2e8f0;
+            color: #2d3748;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .filter-btn:hover {
+            background: #cbd5e0;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .form-title {
+            color: #4a5568;
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .form-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .file-size {
+            color: #718096;
+            font-size: 0.85em;
+        }
+
+        .download-btn {
+            background: #48bb78;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #38a169;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            color: #718096;
+            font-size: 1.2em;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Base de Datos de Formularios USCIS</h1>
+            <p class="subtitle">Acceso rápido a 100 formularios de inmigración</p>
+        </header>
+
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <span class="stat-number" id="totalForms">-</span>
+                <span class="stat-label">Formularios Totales</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="totalSize">-</span>
+                <span class="stat-label">Tamaño Total</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="seriesCount">-</span>
+                <span class="stat-label">Series Disponibles</span>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <input type="text" 
+                   class="search-box" 
+                   id="searchBox" 
+                   placeholder="🔍 Buscar formularios... (ej: I-485, naturalización, empleo)">
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="I">Serie I</button>
+                <button class="filter-btn" data-filter="N">Serie N</button>
+                <button class="filter-btn" data-filter="G">Serie G</button>
+                <button class="filter-btn" data-filter="AR">Serie AR</button>
+            </div>
+        </div>
+
+        <div id="formsContainer">
+            <div class="loading">Cargando formularios...</div>
+        </div>
+
+        <footer>
+            <p>Base de datos actualizada: <span id="lastUpdate">-</span></p>
+            <p>Desarrollado con ❤️ para facilitar el acceso a formularios USCIS</p>
+        </footer>
+    </div>
+
+    <script>
+        let allForms = [];
+        let currentFilter = 'all';
+
+        // Cargar datos desde el API
+        async function loadForms() {
+            try {
+                const response = await fetch('/api/forms');
+                const data = await response.json();
+                allForms = data.forms;
+                
+                // Actualizar estadísticas
+                document.getElementById('totalForms').textContent = data.stats.total;
+                document.getElementById('totalSize').textContent = data.stats.size;
+                document.getElementById('seriesCount').textContent = data.stats.series;
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString();
+                
+                // Mostrar formularios
+                displayForms(allForms);
+            } catch (error) {
+                console.error('Error cargando formularios:', error);
+                document.getElementById('formsContainer').innerHTML = 
+                    '<div class="no-results">Error cargando formularios. Asegúrate de que el servidor esté ejecutándose.</div>';
+            }
+        }
+
+        // Mostrar formularios
+        function displayForms(forms) {
+            const container = document.getElementById('formsContainer');
+            
+            if (forms.length === 0) {
+                container.innerHTML = '<div class="no-results">No se encontraron formularios</div>';
+                return;
+            }
+
+            const html = forms.map(form => `
+                <div class="form-card">
+                    <div class="form-number">${form.number}</div>
+                    <div class="form-title">${form.title || 'Formulario USCIS'}</div>
+                    <div class="form-info">
+                        <span class="file-size">${formatSize(form.size)}</span>
+                        <button class="download-btn" onclick="downloadForm('${form.number}', '${form.filename}')">
+                            ⬇ Descargar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `<div class="forms-grid">${html}</div>`;
+        }
+
+        // Formatear tamaño de archivo
+        function formatSize(bytes) {
+            if (!bytes) return 'N/A';
+            const kb = bytes / 1024;
+            const mb = kb / 1024;
+            return mb >= 1 ? `${mb.toFixed(2)} MB` : `${kb.toFixed(2)} KB`;
+        }
+
+        // Descargar formulario
+        function downloadForm(number, filename) {
+            window.location.href = `/download/${filename}`;
+        }
+
+        // Búsqueda
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = allForms.filter(form => 
+                form.number.toLowerCase().includes(query) ||
+                (form.title && form.title.toLowerCase().includes(query))
+            );
+            displayForms(filtered);
+        });
+
+        // Filtros
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Actualizar botón activo
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filtrar
+                const filter = btn.dataset.filter;
+                currentFilter = filter;
+                
+                const filtered = filter === 'all' 
+                    ? allForms 
+                    : allForms.filter(form => form.number.startsWith(filter));
+                
+                displayForms(filtered);
+            });
+        });
+
+        // Cargar al inicio
+        loadForms();
+    </script>
+</body>
+</html>

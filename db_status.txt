@@ -1,0 +1,41 @@
+======================================================================
+RESUMEN DE BASE DE DATOS USCIS
+======================================================================
+
+Total registros: 138
+Descargados: 100
+No encontrados: 38
+
+Tamanio total: 57.53 MB
+Archivos PDF fisicos: 100
+
+Consistencia BD/Archivos: OK
+
+Formularios descargados por serie:
+  AR      :   1 formularios
+  EOIR    :   1 formularios
+  G       :  16 formularios
+  I       :  72 formularios
+  N       :  10 formularios
+
+Lista de formularios (muestra de 15):
+  - AR-11
+  - EOIR-29
+  - G-1041
+  - G-1041A
+  - G-1055
+  - G-1145
+  - G-1256
+  - G-1450
+  - G-1566
+  - G-1650
+  - G-1651
+  - G-28
+  - G-28I
+  - G-325A
+  - G-325R
+
+======================================================================
+Base de datos: uscis_forms/uscis_forms.db
+PDFs: uscis_forms/pdfs/
+======================================================================

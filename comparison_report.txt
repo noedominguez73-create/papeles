@@ -1,0 +1,124 @@
+================================================================================
+COMPARACION: Formularios Descargados vs Lista Oficial USCIS
+================================================================================
+
+ESTADISTICAS
+  Lista oficial USCIS: 102 formularios unicos
+  Descargados exitosamente: 100 formularios
+  Intentados total: 138 formularios
+
+[OK] DESCARGADOS DE LA LISTA OFICIAL: 99
+   [OK] AR-11
+   [OK] EOIR-29
+   [OK] G-1041
+   [OK] G-1041A
+   [OK] G-1055
+   [OK] G-1145
+   [OK] G-1256
+   [OK] G-1450
+   [OK] G-1566
+   [OK] G-1650
+   [OK] G-1651
+   [OK] G-28
+   [OK] G-28I
+   [OK] G-325A
+   [OK] G-325R
+   [OK] G-639
+   [OK] G-845
+   [OK] G-884
+   [OK] I-102
+   [OK] I-129
+   [OK] I-129CW
+   [OK] I-129CWR
+   [OK] I-129F
+   [OK] I-129S
+   [OK] I-130
+   [OK] I-131
+   [OK] I-131A
+   [OK] I-134
+   [OK] I-140
+   [OK] I-191
+   [OK] I-192
+   [OK] I-193
+   [OK] I-212
+   [OK] I-290B
+   [OK] I-356
+   [OK] I-360
+   [OK] I-361
+   [OK] I-363
+   [OK] I-407
+   [OK] I-485
+   [OK] I-508
+   [OK] I-526
+   [OK] I-526E
+   [OK] I-539
+   [OK] I-566
+   [OK] I-589
+   [OK] I-600
+   [OK] I-600A
+   [OK] I-601
+   [OK] I-601A
+   [OK] I-602
+   [OK] I-612
+   [OK] I-687
+   [OK] I-690
+   [OK] I-693
+   [OK] I-694
+   [OK] I-698
+   [OK] I-730
+   [OK] I-751
+   [OK] I-765
+   [OK] I-765V
+   [OK] I-800
+   [OK] I-800A
+   [OK] I-817
+   [OK] I-821
+   [OK] I-821D
+   [OK] I-824
+   [OK] I-829
+   [OK] I-864
+   [OK] I-864A
+   [OK] I-864EZ
+   [OK] I-865
+   [OK] I-881
+   [OK] I-9
+   [OK] I-90
+   [OK] I-905
+   [OK] I-907
+   [OK] I-910
+   [OK] I-912
+   [OK] I-914
+   [OK] I-918
+   [OK] I-929
+   [OK] I-941
+   [OK] I-945
+   [OK] I-956
+   [OK] I-956F
+   [OK] I-956G
+   [OK] I-956H
+   [OK] I-956K
+   [OK] N-300
+   [OK] N-336
+   [OK] N-400
+   [OK] N-426
+   [OK] N-470
+   [OK] N-565
+   [OK] N-600
+   [OK] N-600K
+   [OK] N-644
+   [OK] N-648
+
+[FALTA] FALTANTES DE LA LISTA OFICIAL: 3
+   [X] I-140G          (intentado sin exito)
+   [X] I-854           (intentado sin exito)
+   [X] I-864P          (intentado sin exito)
+
+[EXTRA] Descargados pero NO en lista oficial: 1
+   [+] I-590
+
+================================================================================
+RESUMEN
+================================================================================
+Cobertura: 99/102 (97.1%)
+Faltantes: 3 formularios
+================================================================================
